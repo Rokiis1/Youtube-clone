@@ -7,19 +7,24 @@ import { RootState } from "../store/store";
 
 const API_KEY = import.meta.env.VITE_YOUTUBE_DATA_API_KEY;
 
-export const getHomePageVideos = createAsyncThunk(
-  "youtubeState/searchPageVidoes",
+export const getSearchPageVideos = createAsyncThunk(
+  "youtubeState/homePageVidoes",
   async (isNext: boolean, { getState }) => {
     const {
-      youtubeState: { nextPageToken: nextPageTokenFromState, videos },
+      youtubeState: {
+        nextPageToken: nextPageTokenFromState,
+        videos,
+        searchTerm,
+      },
     } = getState() as RootState;
     const {
       data: { items, nextPageToken },
     } = await axios.get(
-      `${YOUTUBE_API_URL}/search?maxResults=20&q=""&key=${API_KEY}&part=snippet&type=video&${
+      `${YOUTUBE_API_URL}/search?q=${searchTerm}&key=${API_KEY}&part=snippet&type=video&${
         isNext ? `pageToken=${nextPageTokenFromState}` : ""
       }`
     );
+    // console.log({ items, nextPageTokenFromState, nextPageToken });
     const parsedData: HomePageVideos[] | undefined = await parseData(items);
     return { parsedData: [...videos, ...parsedData!], nextPageToken };
   }
