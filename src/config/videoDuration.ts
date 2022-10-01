@@ -1,4 +1,4 @@
-export const parseVideoDuration = (duration: string): string => {
+export const videoDuration = (duration: string): string => {
   const durationParts: string[] = duration
     .replace("PT", "")
     .replace("H", ":")

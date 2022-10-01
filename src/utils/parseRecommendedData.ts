@@ -1,5 +1,5 @@
 import axios from "axios";
-import { convertViewstoString, parseVideoDuration, timeSince } from "./index";
+import { convertViewstoString, videoDuration, timeSince } from "./index";
 import { YOUTUBE_API_URL } from "../config/constants";
 import { Item, RecommendedVideos } from "../interfaces/Types";
 
@@ -34,9 +34,7 @@ export const parseRecommendedData = async (items: Item[], videoId: string) => {
         videoId: item.contentDetails.upload.videoId,
         videoTitle: item.snippet.title,
         videoThumbnail: item.snippet.thumbnails.medium.url,
-        videoDuration: parseVideoDuration(
-          videosData[index].contentDetails.duration
-        ),
+        videoDuration: videoDuration(videosData[index].contentDetails.duration),
         videoViews: convertViewstoString(
           videosData[index].statistics.viewCount
         ),

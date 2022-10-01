@@ -62,3 +62,7 @@ export interface Item {
   };
   contentDetails: { upload: { videoId: string } };
 }
+
+export interface Props {
+  show: boolean;
+}

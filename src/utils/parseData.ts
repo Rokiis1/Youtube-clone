@@ -1,7 +1,7 @@
 import axios from "axios";
 import { HomePageVideos } from "../interfaces/Types";
 import { YOUTUBE_API_URL } from "../config/constants";
-import { convertViewstoString, parseVideoDuration, timeSince } from "./index";
+import { convertViewstoString, videoDuration, timeSince } from "./index";
 
 const API_KEY = import.meta.env.VITE_YOUTUBE_DATA_API_KEY;
 
@@ -69,7 +69,7 @@ export const parseData = async (items: any[]) => {
             videoDescription: item.snippet.description,
             videoThumbnail: item.snippet.thumbnails.medium.url,
             videoLink: `https://www.youtube.com/watch?v=${item.id.videoId}`,
-            videoDuration: parseVideoDuration(
+            videoDuration: videoDuration(
               videosData[index].contentDetails.duration
             ),
             videoViews: convertViewstoString(

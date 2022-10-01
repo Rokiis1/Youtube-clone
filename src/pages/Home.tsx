@@ -1,4 +1,4 @@
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { getHomePageVideos } from "../features/api/getHomePageVideos";
 import { useAppDispatch, useAppSelector } from "../features/store/store";
 import Navigation from "../layouts/Navigation";
@@ -10,6 +10,7 @@ import VideoCard from "../components/VideoCard";
 import { clearVideos } from "../features/slice/youtubeSlice";
 
 const Home = () => {
+  const [show, setShow] = useState(false);
   const dispatch = useAppDispatch();
   const videos = useAppSelector((state) => state.youtubeState.videos);
 
@@ -25,9 +26,6 @@ const Home = () => {
 
   return (
     <div className="max-h-screen overflow-hidden">
-      <div style={{ height: "7.5vh" }}>
-        <Navigation />
-      </div>
       <div className="flex" style={{ height: "92.5vh" }}>
         <SideBar />
         {videos.length ? (
