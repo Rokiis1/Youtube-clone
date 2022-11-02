@@ -2,11 +2,12 @@
 # Table of contents
 
 - [Overview](#overview)
-- [API Reference](#apireference)
-- [Run Locally](#runlocally)
+- [Technologies](#technologies)
+- [API Reference](#api-reference)
+- [Run Locally](#run-locally)
 - [Demo](#demo)
 
-# 📖 Overview
+# Overview
 
 Youtube clone consists of 5 components: Navbar, aside, body, search input, watch video.
 
