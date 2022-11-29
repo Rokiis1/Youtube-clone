@@ -1,14 +1,18 @@
-FROM node:18-alpine
+FROM node:lts-alpine
 
-WORKDIR /app
+ENV NODE_ENV=production
 
-COPY package.json .
+WORKDIR /usr/src/app
 
-RUN npm install
+COPY ["package.json", "package-lock.json*", "npm-shrinkwrap.json*", "./"]
 
+RUN npm install --production --silent && mv node_modules ../
 COPY . .
 
 EXPOSE 3000
-# required for docker desktop port mapping
 
-CMD ["npm", "run", "dev"]
+RUN chown -R node /usr/src/app
+
+USER node
+
+CMD ["npm", "start"]
