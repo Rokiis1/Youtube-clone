@@ -1,0 +1,13 @@
+version: "3"
+services:
+    nginx-react:
+      image: frontend:latest
+      container_name: youtube_clone
+      build:
+        context: .
+        dockerfile: Dockerfile
+      ports: 
+        - 80:80
+      environment:
+        NODE_ENV: production
+        VITE_YOUTUBE_DATA_API_KEY: ${VITE_YOUTUBE_DATA_API_KEY}
